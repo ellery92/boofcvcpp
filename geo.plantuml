@@ -1,0 +1,29 @@
+@startuml
+namespace geo.structure {
+
+class GeoTuple<T> {
+    .. abstract ..
+    +int getDimesion()
+    +Ref<T> createNewInstance()
+    +Ref<T> copy()
+}
+
+GeoTuple <|-- GeoTuple_F64
+class GeoTuple_F64<T> {
+    .. virtual ..
+    +bool isIdentical( Ref<T> t, double tol )
+    +double norm()
+    +double normSq()
+    +double distance( T t )
+    +double distance2( T t )
+    +bool equals(Ref<GeoTuple_F64> obj)
+    .. override ..
+    +Ref<T> copy()
+    .. abstract ..
+    +double getIndex( int index )
+    +void setIndex( int index, double value )
+}
+
+}
+
+@enduml
