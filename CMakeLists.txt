@@ -23,8 +23,9 @@ file(GLOB boofcv-SRCS
   src/geo/struct/point/*.cpp
   src/geo/struct/line/*.cpp
   src/geo/struct/shapes/*.cpp
-  # src/geo/geometry/*.cpp
+  src/geo/geometry/*.cpp
+  src/geo/geometry/algs/*.cpp
+  src/geo/metric/*.cpp
   )
 
 add_executable(boofcv ${boofcv-SRCS})
-target_compile_options( boofcv PUBLIC -std=c++11 -fpermissive -w -Wall )

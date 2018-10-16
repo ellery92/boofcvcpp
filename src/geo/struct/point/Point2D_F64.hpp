@@ -1,54 +1,57 @@
 #pragma once
 #include <Object.hpp>
+#include <geo/struct/GeoTuple2D_F64.hpp>
 
 namespace geo { namespace structure { namespace point {
 
 /**
  * A point in 2D
  */
-class Point2D_F64 : public Object {
+class Point2D_F64 : public GeoTuple2D_F64<Point2D_F64> {
   D_OBJECT(Point2D_F64)
 public:
   virtual ~Point2D_F64() = default;
-  Point2D_F64();
-  Point2D_F64(double x, double y);
+  Point2D_F64() {
+  }
 
-  bool equals(double x, double y);
-  bool equals(double x, double y, double tol);
-  bool equals(Ref<Point2D_F64> other, double tol);
+  Point2D_F64(Ref<GeoTuple2D_F64> orig) {
+    GeoTuple2D_F64::set(orig->x, orig->y);
+  }
 
-  void set(Ref<Point2D_F64> orig);
-  void set(double x, double y);
-  void setX(double x);
-  void setY(double y);
-  double getX();
-  double getY();
+  Point2D_F64(double x, double y) {
+    GeoTuple2D_F64::set(x, y);
+  }
 
-  void plusIP(Point2D_F64 const &other);
-  Ref<Point2D_F64> plus(Point2D_F64 const &other);
+  Point2D_F64(Ref<Point2D_F64> pt) {
+    GeoTuple2D_F64::set(pt->x, pt->y);
+  }
 
-  void timesIP(double scalar);
-  void scale(double scalar);
-  Ref<Point2D_F64> times(double scalar);
+  Point2D_F64(Point2D_F64 *pt) {
+    GeoTuple2D_F64::set(pt->x, pt->y);
+  }
 
-  double distance(double x, double y);
-  double distance2(double x, double y);
-  double distance(Ref<Point2D_F64> other);
-  double distance2(Ref<Point2D_F64> other);
+  void set(Ref<Point2D_F64> orig) {
+    _set(orig);
+  }
 
-  double getIndex(int index);
-  void setIndex(int index, double value);
+  void set(Point2D_F64 *orig) {
+    GeoTuple2D_F64::set(orig->x, orig->y);
+  }
 
-  double norm();
-  double normSq();
-  int getDimention();
+  virtual void set(double x, double y) override {
+    GeoTuple2D_F64::set(x, y);
+  }
 
   void swapX(Ref<Point2D_F64> other);
   void swapY(Ref<Point2D_F64> other);
 
-private:
-  double x_;
-  double y_;
+  virtual Ref<Point2D_F64> copy() override {
+    return Ref<Point2D_F64>(new Point2D_F64(x, y));
+  }
+
+  virtual Ref<Point2D_F64> createNewInstance() override {
+    return Ref<Point2D_F64>(new Point2D_F64());
+  }
 };
 
 }}}

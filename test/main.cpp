@@ -3,11 +3,12 @@
 #include <geo/struct/point/Point2D_I32.hpp>
 #include <geo/struct/point/Point2D_F64.hpp>
 
+#include <geo/struct/line/LineSegment2D_F64.hpp>
+
 #include <geo/struct/shapes/Rectangle2D_I32.hpp>
 #include <geo/struct/shapes/Rectangle2D_F64.hpp>
 
 // #include <geo/struct/shapes/Polygon2D_I32.hpp>
-// #include <geo/struct/line/LineSegment2D_F64.hpp>
 
 using namespace geo::structure::point;
 

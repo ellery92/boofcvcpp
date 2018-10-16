@@ -21,7 +21,15 @@ class GeoTuple_F64<T> {
     +Ref<T> copy()
     .. abstract ..
     +double getIndex( int index )
-    +void setIndex( int index, double value )
+    +void setIndex( Int index, double value )
+}
+
+GeoTuple2D_F64 --|> GeoTuple_F64
+class GeoTuple2D_F64<T> {
+    +double x
+    +double y
+    +GeoTuple2D_F64()
+    +GeoTuple2D_F64(double x, double y)
 }
 
 }

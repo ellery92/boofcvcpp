@@ -16,7 +16,7 @@ namespace geo { namespace structure { namespace line {
 class LineSegment2D_I32 : public Object {
   D_OBJECT(LineSegment2D_I32)
 
-public:
+  public:
   LineSegment2D_I32();
 
   LineSegment2D_I32( Ref<Point2D_I32> a, Ref<Point2D_I32> b );
@@ -31,7 +31,7 @@ public:
 
   void set( int x0, int y0, int x1, int y1 );
 
-   Ref<Point2D_I32> getA();
+  Ref<Point2D_I32> getA();
 
   void setA( Ref<Point2D_I32>  a );
 

@@ -1,0 +1,22 @@
+* TODO geometry
+** point
+   - [X] GeoTuple<T>
+   - [X] GeoTuple_F64<T>
+   - [X] GeoTuple2D_F64<T>
+   - [X] Point2D_F64
+   - [X] UtilVector2D_F64
+   - [X] Vector2D_F64
+   - [X] Point2D_I32
+** line
+   - [X] LineSegment2D_I32
+   - [X] LineSegment2D_F64
+   - [X] LineGeneral2D_F64
+   - [X] LineParametric2D_I32
+   - [X] LineParametric2D_F64
+   - [X] UtilLine2D_I32
+   - [X] LinePolar2D_F64
+** shape
+   - [X] Rectangele2D_I32
+   - [X] Rectangele2D_F64
+   - [X] Polygon2D_I32
+   - [ ] Polygon2D_F64

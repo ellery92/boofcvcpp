@@ -45,7 +45,7 @@ public:
   void setP1(Ref<Point2D_F64> p1);
 
   bool equals(Ref<Rectangle2D_F64> obj);
-private:
+
   /**
    * Lower extent
    */

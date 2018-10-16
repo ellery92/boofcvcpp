@@ -18,6 +18,7 @@ class LineSegment2D_F64 : public Object {
 
 public:
   LineSegment2D_F64();
+  virtual ~LineSegment2D_F64() = default;
 
   LineSegment2D_F64( Ref<Point2D_F64> a, Ref<Point2D_F64> b );
 
@@ -31,7 +32,7 @@ public:
 
   void set( double x0, double y0, double x1, double y1 );
 
-   Ref<Point2D_F64> getA();
+  Ref<Point2D_F64> getA();
 
   void setA( Ref<Point2D_F64>  a );
 
@@ -49,7 +50,6 @@ public:
 
   Ref<LineSegment2D_F64> copy();
 
-private:
   Ref<Point2D_F64> a_;
   Ref<Point2D_F64> b_;
 };

@@ -61,7 +61,6 @@ public:
   virtual Ref<Point2D_I32> copy() override;
 
 
-private:
   int x_;
   int y_;
 };

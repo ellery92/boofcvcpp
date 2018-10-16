@@ -17,7 +17,7 @@ using namespace geo::structure::shapes;
 
 #include <vector>
 
-// namespace geo { namespace geometry {
+namespace geo { namespace geometry {
 
 /**
  * Various functions related to polygons.
@@ -42,7 +42,7 @@ public:
    * @param quad (Input) Quadrilateral
    * @param rectangle (Output) Minimum area rectangle
    */
-  static void bounding( Polygon2D_I32 const &quad , Rectangle2D_I32 &rectangle );
+  void bounding( Ref<Polygon2D_I32> quad , Ref<Rectangle2D_I32> rectangle );
 
   /**
    * Returns true if the polygon is ordered in a counter-clockwise order.  This is done by summing up the interior
@@ -51,14 +51,14 @@ public:
    * @param polygon List of ordered points which define a polygon
    * @return true if CCW and false if CW
    */
-  static bool isCCW( std::vector<Point2D_I32> &polygon );
+  static bool isCCW( std::vector<Ref<Point2D_I32> > &polygon );
 
   /**
    * Flips the order of points inside the polygon.  The first index will remain the same will otherwise be reversed
    *
    * @param a Polygon of order 3 or more.
    */
-  static void flip( Polygon2D_I32 &a );
+  static void flip( Polygon2D_I32 *a );
 
   /**
    * Determines if the polugon is convex or concave.
@@ -66,7 +66,7 @@ public:
    * @param poly Polygon
    * @return true if convex and false if concave
    */
-  static bool isConvex( Polygon2D_I32 const &poly );
+  static bool isConvex( Polygon2D_I32 *poly );
 
   /**
    * Returns true if the cross product would result in a strictly positive z (e.g. z > 0 ). If true then
@@ -80,9 +80,9 @@ public:
    * @param c third point in sequence
    * @return true if positive z
    */
-  static bool isPositiveZ(Point2D_I32 const &a,
-                          Point2D_I32 const &b,
-                          Point2D_I32 const &c  );
+  static bool isPositiveZ(Point2D_I32 const *a,
+                          Point2D_I32 const *b,
+                          Point2D_I32 const *c  );
 
   /**
    * Checks to see if the vertexes of the two polygon's are the same up to the specified tolerance
@@ -91,7 +91,7 @@ public:
    * @param b Polygon
    * @return true if identical up to tolerance or false if not
    */
-  static bool isIdentical(Polygon2D_I32 const &a , Polygon2D_I32 const &b  );
+  static bool isIdentical(Polygon2D_I32 *a, Ref<Polygon2D_I32> b);
 
   /**
    * Checks to see if the vertexes of the two polygon's are the same up to the specified tolerance and allows
@@ -101,8 +101,8 @@ public:
    * @param b Polygon
    * @return true if identical up to tolerance or false if not
    */
-  static bool isEquivalent( Polygon2D_I32 const &a , Polygon2D_I32 const &b  );
+  static bool isEquivalent( Polygon2D_I32 *a , Ref<Polygon2D_I32> b);
 
 };
 
-// }}
+}}

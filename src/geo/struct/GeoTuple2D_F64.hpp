@@ -23,12 +23,14 @@ public:
   GeoTuple2D_F64() {
   }
 
+  virtual ~GeoTuple2D_F64() = default;
+
   void _set( Ref<GeoTuple2D_F64> a ) {
     x = a->x;
     y = a->y;
   }
 
-  void set( double x, double y ) {
+  virtual void set( double x, double y ) {
     this->x = x;
     this->y = y;
   }
@@ -41,8 +43,8 @@ public:
     return ( abs( this->x - x ) <= tol && abs( this->y - y ) <= tol );
   }
 
-  bool isIdentical( T t, double tol ) {
-    return ( abs( this->x - t.x ) <= tol && abs( this->y - t.y ) <= tol );
+  virtual bool isIdentical( Ref<T> t, double tol ) override {
+    return ( std::abs( this->x - t->x ) <= tol && std::abs( this->y - t->y ) <= tol );
   }
 
   void setX( double x ) {
@@ -80,7 +82,7 @@ public:
    *
    * @param a value which is to be added
    */
-  T plus( Ref<GeoTuple2D_F64> a ) {
+  Ref<T> plus( Ref<GeoTuple2D_F64> a ) {
     Ref<T> ret = this->createNewInstance();
     ret->x = x + a->x;
     ret->y = y + a->y;
@@ -110,8 +112,8 @@ public:
    * @param scalar value which is it multiplied by
    * @return new matrix which is the original scaled
    */
-  T times( double scalar ) {
-    T ret = this->createNewInstance();
+  Ref<T> times( double scalar ) {
+    Ref<T> ret = this->createNewInstance();
     ret.x = x*scalar;
     ret.y = y*scalar;
     return ret;
@@ -143,21 +145,21 @@ public:
     return dx*dx + dy*dy;
   }
 
-  double distance( T t ) {
-    double dx = t.x - x;
-    double dy = t.y - y;
+  virtual double distance( Ref<T> t ) override {
+    double dx = t->x - x;
+    double dy = t->y - y;
 
     return sqrt( dx * dx + dy * dy );
   }
 
-  double distance2( T t ) {
-    double dx = t.x - x;
-    double dy = t.y - y;
+  virtual double distance2( Ref<T> t ) override {
+    double dx = t->x - x;
+    double dy = t->y - y;
 
     return dx * dx + dy * dy;
   }
 
-  double getIndex( int index ) {
+  virtual double getIndex( int index ) override {
     switch( index ) {
     case 0:
       return x;
@@ -170,7 +172,7 @@ public:
     }
   }
 
-  void setIndex( int index, double value ) {
+  virtual void setIndex( int index, double value ) override {
     switch( index ) {
     case 0:
       x = value;
@@ -201,10 +203,7 @@ public:
     std::cout << "(" << x << "," << y << ")";
   }
 
-  virtual bool equals(Ref<Object> obj) override {
-    if( this->getClass() != obj->getClass() )
-      return false;
-    Ref<GeoTuple2D_F64> p = (Ref<GeoTuple2D_F64>)obj;
+  virtual bool equals(Ref<GeoTuple2D_F64> p) {
     return x==p->x&&y==p->y;
   }
 };

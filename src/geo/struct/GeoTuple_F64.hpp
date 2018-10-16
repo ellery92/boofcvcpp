@@ -23,13 +23,13 @@ public:
    * @param tol How similar each element must be for them to be considered identical.
    * @return if they are identical or not.
    */
-  bool isIdentical( Ref<T> t, double tol ) {
+  virtual bool isIdentical( Ref<T> t, double tol ) {
     if( t->getDimension() != this->getDimension() )
       return false;
 
     int N = this->getDimension();
     for( int i = 0; i < N; i++ ) {
-      double diff = abs( this->getIndex( i ) - t->getIndex( i ) );
+      double diff = std::abs( this->getIndex( i ) - t->getIndex( i ) );
 
       if( diff > tol )
         return false;
@@ -43,7 +43,7 @@ public:
    *
    * @return An exact copy of this GeoTuple.
    */
-  Ref<T> copy() {
+  virtual Ref<T> copy() override {
     Ref<T> ret = this->createNewInstance();
 
     int N = this->getDimension();
@@ -79,18 +79,18 @@ public:
     return total;
   }
 
-  double distance( T t ) {
+  virtual double distance( Ref<T> t ) {
     return sqrt( distance2( t ) );
   }
 
-  double distance2( T t ) {
-    if( t.getDimension() != this->getDimension() )
+  virtual double distance2( Ref<T> t ) {
+    if( t->getDimension() != this->getDimension() )
       throw std::invalid_argument( "Dimension of input tuple does not match" );
 
     double total = 0;
     const int N = this->getDimension();
     for( int i = 0; i < N; i++ ) {
-      double diff = abs( this->getIndex( i ) - t.getIndex( i ) );
+      double diff = std::abs( this->getIndex( i ) - t->getIndex( i ) );
 
       total += diff * diff;
     }
@@ -108,10 +108,7 @@ public:
 
   virtual void setIndex( int index, double value ) = 0;
 
-  virtual bool equals(Ref<GeoTuple_F64<T> > obj) {
-    if( this->getClass() != obj->getClass() )
-      return false;
-    Ref<GeoTuple_F64<T> > p = obj;
+  bool equals(Ref<GeoTuple_F64> p) {
     const int N = this->getDimension();
 
     if( N != p->getDimension() )

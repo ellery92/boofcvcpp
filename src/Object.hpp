@@ -97,6 +97,12 @@ public:
   T* operator->() const {
     return object_;
   }
+  T* get() const {
+    return object_;
+  }
+  T* get() {
+    return object_;
+  }
   operator T*() const {
     return object_;
   }
